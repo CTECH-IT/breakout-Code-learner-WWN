@@ -19,7 +19,7 @@ let leftPresed = false;
 function drawBall() {
      ctx.beginPath();
      ctx.arc( x, y, ballRadius, 0, Math.PI*2);
-     ctx.fillStyle = "#0095DD";
+     ctx.fillStyle = "#cc0000";
      ctx.fill();
      ctx.closePath();
 
@@ -28,7 +28,7 @@ function drawBall() {
 function drawPaddle() {
     ctx. beginPath();
     ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
-    ctx.fillStyle = "#0095DD";
+    ctx.fillStyle = "#0d0d0d";
     ctx.fill();
     ctx.closePath();
 }
@@ -45,7 +45,7 @@ function draw() {
     x += dx;
     y += dy;
    
-    //check to see if we've gone off hte edge of ht board
+    //check to see if we've gone off hte edge of hit board
     if (x > canvas.width - ballRadius || x < ballRadius) {
         dx = -dx;
     }
@@ -56,12 +56,12 @@ function draw() {
     // paddle controls
     if(rightPressed) {
         paddleX += 7;
-        if (paddleX + paddleWidth > canvas.Widthg){
+        if (paddleX + paddleWidth > canvas.width) {
             paddleX = canvas.width - paddleWidth;
         }
     }
-    else if(leftPresed) {
-        paddleX -=7;
+    else if (leftPresed) {
+        paddleX -= 7;
         if (paddleX < 0){
             paddleX = 0;
         }
@@ -81,7 +81,7 @@ function keyDownHandler(e) {
 }
 
 function keyUpHandler(e) {
-    if(e.key == "Right" || e.key == "ArrowRight"){
+    if(e.key == "Right" || e.key == "ArrowRight") {
         rightPressed = false;
     }
     else if(e.key == "Left" || e.key == "ArrowLeft") {
