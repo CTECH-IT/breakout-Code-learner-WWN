@@ -24,12 +24,12 @@ let brickPadding = 10;
 let brickOffsetTop = 30;
 let brickOffsetLeft = 30;
 
-//set up a 2-dimetional array for the bricks
+// set up a 2-dimetional array for the bricks
 let bricks = [];
 for (let c=0; c < brickColumnCount; c++){
     bricks[c] = [];
     for(let r=0; r < brickRowCount; r++) {
-        bricks[c][r] = { x: 0, y: 0 };
+        bricks[c][r] = { x: 0, y: 0, show: true };
     }
 }
 
@@ -53,15 +53,18 @@ function drawPaddle() {
 function drawBricks() {
     for(let c=0; c < brickColumnCount; c++) {
         for(let r=0; r < brickRowCount; r++) {
-            var brickX = (c*(brickWidth+brickPadding));
-            var brickY = (r*(brickHeight+brickPadding));
-            bricks[c][r].x = 0;
-            bricks[c][r].y = 0;
-            ctx.beginPath();
-            ctx.rect(brickX, brickY, brickWidth, brickHeight);
-            ctx.fillStyle = "#0095DD";
-            ctx.fill();
-            ctx.closePath();
+            if (bricks[c][r].show == true){
+                var brickX = (c*(brickWidth+brickPadding))+brickOffsetLeft;
+                var brickY = (r*(brickHeight+brickPadding))+brickOffsetLeft;
+                bricks[c][r].x = 0;
+                bricks[c][r].y = 0;
+                ctx.beginPath();
+                ctx.rect(brickX, brickY, brickWidth, brickHeight);
+                ctx.fillStyle = "#0095DD";
+                ctx.fill();
+                ctx.closePath();
+            }
+
         }
     }
 }
@@ -70,6 +73,8 @@ function drawBricks() {
 function draw() {
     // clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    console.log(paddleX);
     
     // draw the bricks
     drawBricks();
@@ -123,6 +128,17 @@ function keyDownHandler(e) {
     }
     else if(e.key == "Left" || e.key == "ArrowLeft") {
         leftPresed = true;
+    }
+}
+
+function collisionDetection() {
+    for (let c = 0; c < brickColumnCount; c++) {
+        for (let r = 0; r < brickRowCount; r++) {
+            let b = bricks[c][r];
+            if (x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight) {
+                dy = -dy;
+            }
+        }
     }
 }
 
