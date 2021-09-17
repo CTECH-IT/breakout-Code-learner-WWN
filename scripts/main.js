@@ -73,7 +73,7 @@ function draw() {
     // clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    console.log();
+    console.log(collisionDetection);
 
     // draw the bricks
     drawBricks();
