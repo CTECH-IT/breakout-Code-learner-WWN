@@ -73,8 +73,6 @@ function draw() {
     // clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    console.log(collisionDetection);
-
     // draw the bricks
     drawBricks();
 
@@ -133,6 +131,7 @@ function keyDownHandler(e) {
 }
 
 function collisionDetection() {
+    console.log(collisionDetection);
     for (let c = 0; c < brickColumnCount; c++) {
         for (let r = 0; r < brickRowCount; r++) {
             let b = bricks[c][r];
