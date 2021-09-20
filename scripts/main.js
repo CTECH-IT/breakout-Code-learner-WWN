@@ -23,8 +23,7 @@ let brickHeight = 20;
 let brickPadding = 10;
 let brickOffsetTop = 30;
 let brickOffsetLeft = 30;
-
-let Score = 0;
+let score = 0;
 
 // set up a 2-dimetional array for the bricks
 let bricks = [];
@@ -144,8 +143,8 @@ function collisionDetection() {
                 if (x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight) {
                     dy = -dy;
                     b.show = false;
-                    Score++;
-                    if(Score == brickRowCount*brickColumnCount){
+                    score++;
+                    if(score == brickRowCount*brickColumnCount){
                         alert("Finished the level!");
                         document.location.reload();
                         clearInterval(interval);
@@ -159,7 +158,7 @@ function collisionDetection() {
 function drawScore() {
     ctx.font = "16px Arial";
     ctx.fillStyle = "#0095DD";
-    ctx.filltext("Score: " + Score, 8, 10);
+    ctx.filltext("Score: " + score, 8, 10);
 }
 
 function keyUpHandler(e) {
@@ -171,7 +170,15 @@ function keyUpHandler(e) {
     }
 }
 
+function mouseMoveHandler(e){
+    let relativeX = e.clientX - canvas.offsetLeft;
+    if (relativeX > 0 && relativeX < canvas.width){
+        paddleX = relativeX - paddleWidth /2;
+    }
+}
+
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
+document.addEventListener("mousemove", mouseMoveHandler, false);
 
 let interval = setInterval(draw, 10);
