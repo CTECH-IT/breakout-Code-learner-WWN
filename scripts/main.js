@@ -24,6 +24,7 @@ let brickPadding = 10;
 let brickOffsetTop = 30;
 let brickOffsetLeft = 30;
 let score = 0;
+let Lives = 3;
 
 // set up a 2-dimetional array for the bricks
 let bricks = [];
@@ -124,6 +125,8 @@ function draw() {
 
     drawScore();
 
+    drawLives();
+
 }
 function keyDownHandler(e) {
     if (e.key == "Right" || e.key == "ArrowRight") {
@@ -160,6 +163,12 @@ function drawScore() {
     ctx.font = "16px Arial";
     ctx.fillStyle = "#0095DD";
     ctx.fillText("Score: " + score, 8, 20);
+}
+
+function drawLives() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle= "#FFFF00";
+    ctx.fillText("Remaining Lives: "+ Lives, 140, 20)
 }
 
 function keyUpHandler(e) {
