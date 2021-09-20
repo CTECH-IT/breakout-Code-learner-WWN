@@ -24,6 +24,8 @@ let brickPadding = 10;
 let brickOffsetTop = 30;
 let brickOffsetLeft = 30;
 
+let Score = 0;
+
 // set up a 2-dimetional array for the bricks
 let bricks = [];
 for (let c = 0; c < brickColumnCount; c++) {
@@ -56,8 +58,8 @@ function drawBricks() {
             if (bricks[c][r].show == true) {
                 var brickX = (c * (brickWidth + brickPadding)) + brickOffsetLeft;
                 var brickY = (r * (brickHeight + brickPadding)) + brickOffsetLeft;
-                bricks[c][r].x = 0;
-                bricks[c][r].y = 0;
+                bricks[c][r].x = brickX;
+                bricks[c][r].y = brickY;
                 ctx.beginPath();
                 ctx.rect(brickX, brickY, brickWidth, brickHeight);
                 ctx.fillStyle = "#0095DD";
@@ -114,11 +116,12 @@ function draw() {
             paddleX = 0;
         }
     }
-
     drawPaddle();
 
     //check whether the ball is touching any bricks
     collisionDetection();
+
+    drawScore();
 
 }
 function keyDownHandler(e) {
@@ -131,18 +134,32 @@ function keyDownHandler(e) {
 }
 
 function collisionDetection() {
-    console.log(collisionDetection);
     for (let c = 0; c < brickColumnCount; c++) {
         for (let r = 0; r < brickRowCount; r++) {
             let b = bricks[c][r];
-            if (b.show == true){
+            if (b.show == true) {
+                if (x > b.x && x < b.x + brickWidth) {
+                    console.log("in column: " , b.x, " to ", b.x + brickWidth);
+                 }
                 if (x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight) {
                     dy = -dy;
                     b.show = false;
+                    Score++;
+                    if(Score == brickRowCount*brickColumnCount){
+                        alert("Finished the level!");
+                        document.location.reload();
+                        clearInterval(interval);
+                    }
                 }
             }
         }
     }
+}
+
+function drawScore() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "#0095DD";
+    ctx.filltext("Score: " + Score, 8, 10);
 }
 
 function keyUpHandler(e) {
