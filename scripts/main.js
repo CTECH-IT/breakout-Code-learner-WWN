@@ -74,6 +74,8 @@ function draw() {
     // clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+    console.log(score);
+
     // draw the bricks
     drawBricks();
 
@@ -138,7 +140,6 @@ function collisionDetection() {
             let b = bricks[c][r];
             if (b.show == true) {
                 if (x > b.x && x < b.x + brickWidth) {
-                    console.log("in column: " , b.x, " to ", b.x + brickWidth);
                  }
                 if (x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight) {
                     dy = -dy;
@@ -158,7 +159,7 @@ function collisionDetection() {
 function drawScore() {
     ctx.font = "16px Arial";
     ctx.fillStyle = "#0095DD";
-    ctx.filltext("Score: " + score, 8, 10);
+    ctx.fillText("Score: " + score, 8, 20);
 }
 
 function keyUpHandler(e) {
