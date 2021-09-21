@@ -98,15 +98,11 @@ function draw() {
     } else if (y + dy > canvas.height - ballRadius) { //floor check
         if (x > paddleX && x < paddleX + paddleWidth) { // paddle check
             dy = -dy;
-        } else { // if hit the floor!
-            if (Lives > 1){
-                alert("Lost a Live");
-                1 -= Lives;
-            } else if (Lives = 1){
-                alert("GAME OVER");
-                document.location.reload();
-                clearInterval(interval); // need browswer to end game
-            }
+        } else { // if hit the floor !
+            alert("GAME OVER");
+            document.location.reload();
+            clearInterval(interval); // need browswer to end game
+
         }
     }
 
