@@ -99,9 +99,19 @@ function draw() {
         if (x > paddleX && x < paddleX + paddleWidth) { // paddle check
             dy = -dy;
         } else { // if hit the floor !
-            alert("GAME OVER");
+            if (Lives>0){
+                Lives--;
+                alert("Lost a Life");
+                x = canvas.width /2;
+                y = canvas.height - 30
+                dx = 2;
+                dy = 2;
+                paddleX = (canvas.width-paddleWidth)/2;
+            }else {
+                alert("GAME OVER");
             document.location.reload();
             clearInterval(interval); // need browswer to end game
+            }
 
         }
     }
