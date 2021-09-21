@@ -101,7 +101,7 @@ function draw() {
         } else { // if hit the floor!
             if (Lives > 1){
                 alert("Lost a Live");
-                1 -=score;
+                1 -= Lives;
             } else if (Lives = 1){
                 alert("GAME OVER");
                 document.location.reload();
